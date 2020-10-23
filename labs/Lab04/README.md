@@ -1,3 +1,3 @@
-## Tarefa sobre Análise de Dados usando o Orange
+## Tarefa de sentenças SQL para dados do Nutrition Examination Survey 
 
->![Captura Orange](images/lab03_print.png)
+>![Notebook da tarefa](notebook/nhanes-lab-02.ipynb)
