@@ -63,7 +63,9 @@ Retorne a categoria cujo `<label>` em inglês seja 'e-Science Domain'.
 
 ### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $publicationsdoc:= doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/publications/publications.xml')
+
+return $publicationsdoc//categories/category[label="e-Science Domain"][label/@lang="en-US"]
 ~~~
 
 ## Questão 6
@@ -71,7 +73,9 @@ Retorne as publicações associadas à categoria cujo `<label>` em inglês seja 
 
 ### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $publicationsdoc:= doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/publications/publications.xml')
+
+return $publicationsdoc//publication[key = $publicationsdoc//categories/category[label="e-Science Domain"][label/@lang="en-US"]/@key]
 ~~~
 
 ## Tarefas com DRON e PubChem
@@ -82,7 +86,9 @@ Liste o nome de todas as classificações que estão apenas dois níveis imediat
 
 ### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $dron:= doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/faers-2017-dron/dron.xml')
+
+return {data($dron/drug/drug/drug/@name)}
 ~~~
 
 ## Questão 2
@@ -91,7 +97,9 @@ Apresente todas as classificações de um componente a sua escolha (diferente de
 
 ### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $dron:= doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/faers-2017-dron/dron.xml')
+
+return {data($dron//drug[drug/drug/@name="REMIFENTANIL"]/@name)}
 ~~~
 
 ## Questão 3
@@ -102,7 +110,11 @@ Liste todos os códigos ChEBI dos componentes disponíveis.
 
 #### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $pubchem := doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/pubchem/pubchem-chebi-synonyms.xml')
+
+for $p in ($pubchem//Synonym)
+where substring($p/text(), 1, 6) = 'CHEBI:'
+return substring($p/text(), 7)
 ~~~
 
 ### Questão 3.2
@@ -111,7 +123,10 @@ Liste todos os códigos ChEBI e primeiro nome (sinônimo) de cada um dos compone
 
 #### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $pubchem := doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/pubchem/pubchem-chebi-synonyms.xml')
+
+for $p in ($pubchem//Information)
+return {concat($p/Synonym[1], " - Primeiro nome: ", $p/Synonym[3], '&#xa;')}
 ~~~
 
 ### Questão 3.3
